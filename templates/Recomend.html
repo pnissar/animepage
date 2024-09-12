@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="maii">
+        <div class="mai"></div>
+        <div class="main">
+            <div class="ani-imgdiv">
+                <img class="ani-img" src="{{ dict[rec[0]]['Img']}}" alt="">
+                <a href="{{dict[rec[0]]['Link1']}}" class="Watch">Watch Now</a>
+            </div>
+            <div class="label">
+                <p class="text-box">
+                    {{dict[rec[0]]['des']}}
+                </p>
+                {% if dict[rec[0]]['rate']!='0' %}
+                <div class="rate">
+                    <img src="{{ url_for('static', filename='css/img/plus-18-movie.png') }}" alt="">
+                </div>
+                {% endif %}
+                <div class="mini-box">
+                    {% if dict[rec[0]]['dub']>0 %}
+                    <div class="mini">
+                        <img src="{{ url_for('static', filename='css/img/mic.png') }}" alt="">
+                        <h4>{{dict[rec[0]]['sub']|int}}</h4>
+                    </div>
+                    {% endif %}
+                    {% if dict[rec[0]]['sub']>0 %}
+                    <div class="mini">
+                        <img src="{{ url_for('static', filename='css/img/cc.png') }}" alt="">
+                        <h4>{{dict[rec[0]]['sub']|int}}</h4>
+                    </div>
+                    {% endif %}
+                    {% if dict[rec[0]]['ep']>0 %}
+                    <div class="mini">
+                        <img src="{{ url_for('static', filename='css/img/power.png') }}" alt="">
+                        <h4>{{dict[rec[0]]['sub']|int}}</h4>
+                    </div>
+                    {% endif %}
+                    <h4 class="ty"> . {{dict[rec[0]]['ty']}}</h4>
+                </div>
+                <h1>{{ dict[rec[0]]['Name']}}</h1>
+            </div>
+            <div class="contains">
+                {% set j = rec[0] %}
+                {% for i in range(0, 8) %}
+                {% if dict[j][pl[i]] %}
+                <div class="item-con">
+                    <p class="item-name">{{ pl[i] }}</p>
+                    <p class="item-val">
+                        {% for k in dict[j][pl[i]] %}
+                        {{ k }}
+                        {% endfor %}
+                    </p>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="rec">
+        <h1>Recommendations</h1>
+    </div>
+
+
+    <!-- Rcommendation -->
+    <div class="recomend-div">
+        <div class="recomend">
+            <div class="part1">
+                <img src="{{dict[rec[1]]['Img']}} " class="img1" alt="">
+                <div class="content">
+                    <h1>{{dict[rec[1]]['Name']}}</h1>
+                    <div class="cont-mini">
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="part2">
+                <div class="but">
+                    <a href="" class="Watch">Watch Now</a>
+                    <div class="buttons">
+                        <button class="button" onclick="frsttoend()"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                            </svg></button>
+                        <button class="button" onclick="endtofrst()"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                            </svg></button>
+
+                    </div>
+                </div>
+                <div class="slide-1">
+                    <div class="slide">
+                        {% for i in range(1,15) %}
+                        <a href="{{url_for('recommendlist',name=dict[rec[i]]['Name'])}}">
+                            <div class="slide-item">
+                                <img src="{{dict[rec[i]]['Img']}}" class="img2">
+                                <div class="slide-item-icon">
+                                    {% if dict[rec[i]]['rate']!='0' %}
+                                    <div class="rate">
+                                        <img src="{{ url_for('static', filename='css/img/plus-18-movie.png') }}" alt="">
+                                    </div>
+                                    {% endif %}
+                                    <div class="icon">
+                                        {% if dict[rec[i]]['dub']>0 %}
+                                        <div class="mini">
+                                            <img src="{{ url_for('static', filename='css/img/mic.png') }}" alt="">
+                                            <h4>{{dict[rec[i]]['sub']|int}}</h4>
+                                        </div>
+                                        {% endif %}
+                                        {% if dict[rec[i]]['sub']>0 %}
+                                        <div class="mini">
+                                            <img src="{{ url_for('static', filename='css/img/cc.png') }}" alt="">
+                                            <h4>{{dict[rec[i]]['sub']|int}}</h4>
+                                        </div>
+                                        {% endif %}
+                                        {% if dict[rec[i]]['ep']>0 %}
+                                        <div class="mini">
+                                            <img src="{{ url_for('static', filename='css/img/power.png') }}" alt="">
+                                            <h4>{{dict[rec[i]]['sub']|int}}</h4>
+                                        </div>
+                                        {% endif %}
+                                        <h4 class="ty"> . {{dict[rec[i]]['ty']}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 class="slide-text">{{dict[rec[i]]['Name']}}</h4>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+        let p1 = document.getElementsByClassName('part1')[0];
+        let p1img = p1.querySelector('img');
+        let p1con = p1.getElementsByClassName('cont-mini')[0];
+        let p2 = document.getElementsByClassName('part2')[0];
+        let p2b = p2.getElementsByClassName('but')[0];
+        let p2a = p2b.querySelector('a');
+        let part2s = p2.getElementsByClassName('slide-1')[0].getElementsByClassName('slide')[0];
+        console.log(part2s.firstElementChild);
+        function update(child) {
+            p2a.href = child.href;
+            let t = child.getElementsByClassName('slide-item')[0];
+            let timg = t.querySelector('img').src;
+            let tslide = t.getElementsByClassName('slide-item-icon')[0].innerHTML;
+            console.log(tslide);
+            p1img.src = timg;
+            p1con.innerHTML = tslide;
+        }
+        function fade(item) {
+            p1con.style.opicity = '0';
+            p1img.style.opicity = '0';
+        }
+        function frsttoend() {
+            let temp = part2s.firstElementChild;
+            fade(temp);
+            temp.style.transform = 'scaleX(0)';
+
+        }
+        function endtofrst() {
+            let temp = part2s.lastElementChild;
+            fade(temp);
+            temp.style.transform = 'scaleX(0)';
+
+        }
+        
+        function rem(child) {
+            part2s.removeChild(child);
+            part2s.appendChild(child);
+
+        }
+
+        update(part2s.firstElementChild);
+        rem(part2s.firstElementChild);
+
+
+    </script>
+
+</body>
+
+</html>
